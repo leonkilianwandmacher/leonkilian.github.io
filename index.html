@@ -22,28 +22,27 @@
     font-family: "handschrift leon-kilian";
     margin-bottom: 10px;
   }
+.marquee-wrap {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
 
-  .marquee-wrap {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    margin-left: -50vw;
-    overflow: hidden;
-    white-space: nowrap;
-    margin-bottom: 10px;
-  }
+.marquee-wrap h1 {
+  display: inline-block;
+  padding-left: 100%;
+  margin-bottom: 0;
+  animation: marquee 12s linear infinite;
+}
 
-  .marquee-wrap h1 {
-    display: inline-block;
-    padding-left: 100%;
-    margin-bottom: 0;
-    animation: marquee 12s linear infinite;
-  }
-
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-100%); }
-  }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
 
   .intro {
     font-size: 20px;
