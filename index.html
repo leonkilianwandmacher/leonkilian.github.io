@@ -9,21 +9,20 @@
     font-family: "handschrift leon-kilian";
     src: url("handschrift leon-kilian.ttf");
   }
-@font-face {
-  font-family: "schrift website";
-  src: url("schrift website.otf");
-}
- body {
-  background-image: url("hintergrund website.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: #0021ff;
-  padding: 40px;
-  font-family: schrift website;
-       margin-bottom: 10px;
+
+  body {
+    background-color: #f4f2ef;
+    color: #0021ff;
+    padding: 40px;
+    font-family: sans-serif;
   }
- 
+
+  h1 {
+    color: #0021ff;
+    font-family: "handschrift leon-kilian";
+    margin-bottom: 10px;
+  }
+
   .marquee-wrap {
     width: 100vw;
     position: relative;
@@ -33,25 +32,17 @@
     white-space: nowrap;
     margin-bottom: 10px;
   }
- 
+
   .marquee-wrap h1 {
     display: inline-block;
     padding-left: 100%;
     margin-bottom: 0;
     animation: marquee 12s linear infinite;
   }
- 
+
   @keyframes marquee {
     from { transform: translateX(0); }
     to   { transform: translateX(-100%); }
-  }
-};
-  }
-
-  h1 {
-    color: #0021ff;
-    font-family: "schrift website";
-    margin-bottom: 10px;
   }
 
   .intro {
@@ -74,8 +65,13 @@
   .desktop {
     position: relative;
     max-width: 900px;
-    min-height: 260px;
+    min-height: 320px;
     margin-top: 20px;
+    background-image: url("beispiel.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    overflow: hidden;
   }
 
   .folder {
@@ -90,27 +86,38 @@
   .folder:active { transform: scale(0.96) rotate(var(--r, 0deg)); }
 
   .folder-icon {
-    width: 64px;
-    height: 48px;
+    width: 72px;
+    height: 54px;
     margin: 0 auto 6px;
-    background: linear-gradient(160deg, #f2a0a0, #d97878);
-    border-radius: 3px 6px 6px 6px;
+    background: linear-gradient(180deg, #7cc2ff 0%, #4a9eff 55%, #2f8bfa 100%);
+    border-radius: 4px 10px 10px 10px;
     position: relative;
-    box-shadow: 0 6px 14px rgba(0,33,255,0.15);
+    box-shadow:
+      0 6px 14px rgba(0,0,0,0.25),
+      inset 0 1px 1px rgba(255,255,255,0.5);
   }
   .folder-icon::before {
     content: "";
     position: absolute;
-    top: -8px; left: 0;
-    width: 34px; height: 10px;
-    background: #f2a0a0;
-    border-radius: 3px 6px 0 0;
+    top: -7px; left: 0;
+    width: 30px; height: 12px;
+    background: linear-gradient(180deg, #86c8ff, #5aa8ff);
+    border-radius: 4px 6px 0 0;
+  }
+  .folder-icon::after {
+    content: "";
+    position: absolute;
+    top: 3px; left: 3px; right: 3px;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
+    border-radius: 3px 7px 0 0;
+    pointer-events: none;
   }
 
   .folder-label {
     font-size: 12px;
-    background: #0021ff;
-    color: #f4f2ef;
+    background: rgba(0,0,0,0.55);
+    color: #ffffff;
     padding: 2px 8px;
     border-radius: 3px;
     display: inline-block;
@@ -191,27 +198,28 @@
 </head>
 <body>
 
-  <h1>leon-kilian wandmacher</h1>
-  <p class="intro">cooler typ.</p>
-
-  
-
-  <h2>über mich</h2>
-  <p>Ich bin Leon-Kilian, ein 25 jähriger kreativer, junger Rabauke, aufgewachsen an der Ostsee, 
+  <div class="marquee-wrap">
+    <h1>leon-kilian wandmacher</h1>
+  </div>
+  <p class="intro">Ich bin Leon-Kilian, ein 25 jähriger kreativer, junger Rabauke, aufgewachsen an der Ostsee, 
     der sich zwischen Schulstress, dem Traum vom erfolgreichen Fußballer und dem Erwachsenwerden verlor 
-    und dabei das Ideal des kleinen, frechen Fratz mit Sand in den Haaren vergaß,
+    und dabei das Ideal des kleinen, frechen Fratz mit Sand in den Haaren vergaß, 
     diesen verpeilten burschen, der er mal war
 
 zumindest bis jetzt
 
-durch die kunst und all dem was dazu gehört, sketches in büchern, phrasen in der notiz app, farben der natur 
+durch die kunst 
+    und all dem was dazu gehört, sketches in büchern, phrasen in der notiz app, farben der natur 
     und das rauschen des meeres, 
-    verliere ich mich nur noch auf leinwänden
-    verarbeite alte geschichten,
-    male sie neu, wie sie mir gefallen,
+    verliere ich mich nur noch auf leinwänden 
+    verarbeite alte geschichten, male sie neu, wie sie mir gefallen, 
     male mich neu, 
-    dich.
-  </p>
+    dich.</p>
+
+  <img class="portrait" src="beispiel.jpg" alt="ein bild von mir">
+
+  <h2>über mich</h2>
+  <p>cooler typ.</p>
 
   <h2>arbeiten</h2>
   <p class="intro" style="font-size:14px;">klick auf einen ordner</p>
@@ -297,4 +305,5 @@ durch die kunst und all dem was dazu gehört, sketches in büchern, phrasen in d
   </script>
 
 </body>
+</html>
 </html>
