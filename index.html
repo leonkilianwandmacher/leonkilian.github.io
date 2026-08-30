@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>leon kilian wandmacher</title>
-  <meta charset="UTF-8">
-  <title>leon-kilian</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>leon-kilian</title>
 <style>
   @font-face {
     font-family: "handschrift leon-kilian";
@@ -16,6 +14,7 @@
     background-color: #f4f2ef;
     color: #0021ff;
     padding: 40px;
+    font-family: sans-serif;
   }
 
   h1 {
@@ -33,54 +32,224 @@
     color: #0021ff;
   }
 
-  .werke-container {
+  img.portrait {
+    max-width: 400px;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  /* ---- desktop-ordner-effekt ---- */
+
+  .desktop {
+    position: relative;
+    max-width: 900px;
+    min-height: 260px;
+    margin-top: 20px;
+  }
+
+  .folder {
+    position: absolute;
+    width: 96px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.18s ease;
+  }
+  .folder:hover { transform: scale(1.06) rotate(var(--r, 0deg)); }
+  .folder:active { transform: scale(0.96) rotate(var(--r, 0deg)); }
+
+  .folder-icon {
+    width: 64px;
+    height: 48px;
+    margin: 0 auto 6px;
+    background: linear-gradient(160deg, #f2a0a0, #d97878);
+    border-radius: 3px 6px 6px 6px;
+    position: relative;
+    box-shadow: 0 6px 14px rgba(0,33,255,0.15);
+  }
+  .folder-icon::before {
+    content: "";
+    position: absolute;
+    top: -8px; left: 0;
+    width: 34px; height: 10px;
+    background: #f2a0a0;
+    border-radius: 3px 6px 0 0;
+  }
+
+  .folder-label {
+    font-size: 12px;
+    background: #0021ff;
+    color: #f4f2ef;
+    padding: 2px 8px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  /* fenster / lightbox */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,33,255,0.15);
+    backdrop-filter: blur(3px);
     display: flex;
-    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease;
+    z-index: 50;
+  }
+  .overlay.active {
+    opacity: 1;
+    pointer-events: auto;
   }
 
-  .werk {
-    background-color: #f2a0a0;
-    padding: 20px;
-    border-radius: 8px;
-    color: #1c2440
+  .window {
+    width: min(560px, 88vw);
+    background: #f4f2ef;
+    border-radius: 10px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+    transform: translateY(24px) scale(0.94);
+    transition: transform 0.28s cubic-bezier(.2,.9,.25,1.2);
+    overflow: hidden;
+  }
+  .overlay.active .window {
+    transform: translateY(0) scale(1);
   }
 
-@media (max-width: 600px) {
-  .werke-container {
-    flex-direction: column;
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0,33,255,0.1);
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot.red { background: #ec6a5e; }
+  .dot.yellow { background: #f4bf4f; }
+  .dot.green { background: #61c454; }
+  .titlebar span {
+    margin-left: 8px;
+    font-size: 12px;
+    color: #0021ff;
+    opacity: 0.6;
   }
 
-  h1 {
-    font-size: 32px;
+  .window-body { padding: 18px; }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 10px;
   }
-}
+  .image-grid div {
+    aspect-ratio: 4/3;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #f2a0a0, #f6c9c9);
+  }
+  .image-grid div:nth-child(2n) { background: linear-gradient(135deg, #0021ff, #7d8bff); }
+  .image-grid div:nth-child(3n) { background: linear-gradient(135deg, #1c2440, #2e3a63); }
+
+  /* responsive */
+  @media (max-width: 600px) {
+    h1 { font-size: 32px; }
+    .desktop { min-height: 420px; }
+  }
 </style>
-
-
 </head>
 <body>
 
-  <h1>leon kilian wandmacher</h1>
-  <p class="intro ">künstler aus berlin, ursprünglich von der ostseeküste.</p>
-  
+  <h1>leon-kilian wandmacher</h1>
+  <p class="intro">künstler aus berlin, ursprünglich von der ostseeküste.</p>
 
-
-  <img src="beispiel.jpg" alt="ein bild von mir">
+  <img class="portrait" src="beispiel.jpg" alt="ein bild von mir">
 
   <h2>über mich</h2>
   <p>ich male und schreibe autobiografisch. ausgangspunkt sind meistens sätze aus meiner notizapp oder ein bild von draußen.</p>
 
   <h2>arbeiten</h2>
-  <div class="werke-container">
-  <div class="werk">feverdream</div>
-  <div class="werk">erinnerung an blau</div>
-  <div class="werk">mitten in den zwanzigern</div>
-</div>
+  <p class="intro" style="font-size:14px;">klick auf einen ordner</p>
+
+  <div class="desktop" id="desktop"></div>
+
+  <div class="overlay" id="overlay">
+    <div class="window">
+      <div class="titlebar">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <span id="window-title">ordner</span>
+      </div>
+      <div class="window-body">
+        <div class="image-grid" id="image-grid"></div>
+      </div>
+    </div>
+  </div>
 
   <h2>kontakt</h2>
   <p>schreib mir: <a href="mailto:hallo@leonkilian.com">hallo@leonkilian.com</a></p>
   <p>oder auf <a href="https://instagram.com/deinaccount">instagram</a></p>
 
+  <script>
+    // deine drei werke als ordner, count = anzahl platzhalter-kacheln im fenster
+    const folders = [
+      { name: "feverdream", count: 3 },
+      { name: "erinnerung an blau", count: 4 },
+      { name: "mitten in den zwanzigern", count: 2 },
+    ];
+
+    const desktop = document.getElementById('desktop');
+    const overlay = document.getElementById('overlay');
+    const windowTitle = document.getElementById('window-title');
+    const imageGrid = document.getElementById('image-grid');
+
+    const positions = [];
+    function randomPos() {
+      let x, y, tries = 0;
+      do {
+        x = 10 + Math.random() * 700;
+        y = 10 + Math.random() * 160;
+        tries++;
+      } while (positions.some(p => Math.hypot(p.x - x, p.y - y) < 130) && tries < 40);
+      positions.push({ x, y });
+      return { x, y };
+    }
+
+    folders.forEach(folder => {
+      const pos = randomPos();
+      const rotation = (Math.random() * 6 - 3).toFixed(1);
+
+      const el = document.createElement('div');
+      el.className = 'folder';
+      el.style.left = pos.x + 'px';
+      el.style.top = pos.y + 'px';
+      el.style.setProperty('--r', rotation + 'deg');
+      el.style.transform = `rotate(${rotation}deg)`;
+
+      el.innerHTML = `
+        <div class="folder-icon"></div>
+        <span class="folder-label">${folder.name}</span>
+      `;
+
+      el.addEventListener('click', () => openFolder(folder));
+      desktop.appendChild(el);
+    });
+
+    function openFolder(folder) {
+      windowTitle.textContent = folder.name;
+      imageGrid.innerHTML = '';
+      for (let i = 0; i < folder.count; i++) {
+        const div = document.createElement('div');
+        imageGrid.appendChild(div);
+      }
+      overlay.classList.add('active');
+    }
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.classList.remove('active');
+    });
+  </script>
 
 </body>
 </html>
