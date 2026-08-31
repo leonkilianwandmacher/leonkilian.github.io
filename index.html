@@ -328,9 +328,15 @@
       overlay.classList.add('active');
     }
 
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) overlay.classList.remove('active');
-    });
+    function openPopup(id) {
+  document.getElementById(id).classList.add('active');
+}
+
+document.querySelectorAll('.overlay').forEach(ov => {
+  ov.addEventListener('click', (e) => {
+    if (e.target === ov) ov.classList.remove('active');
+  });
+
   </script>
 
 </body>
