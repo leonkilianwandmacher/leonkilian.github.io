@@ -59,6 +59,27 @@
   width: 100%
   max-width: 90px;
   aspect-ratio:3/4;
+
+  .about-body {
+    position: relative;
+    overflow: hidden;
+    .about-video{
+      position: absolute;
+      top:0;
+      left:50;
+      transform:translatex(-50%);
+      width:auto%;
+      height:100%
+        aspect-ratio: 9/16;
+        object-fit: cover;
+      z.index:0;
+    }
+    -about-body .subtext {
+      position: relative;
+      z-index:1;
+      background: (rgba(224,242,239,0.75);
+      padding: 8px;
+      border-radius: 4px;
   
   border-radius:6px
     margin:0 0 12px 16px;
@@ -276,7 +297,10 @@
         <span>über mich</span>
       </div>
       <div class="window-body">
-        <img src="hiereinsetzen.jpg" class="about-photo">
+         <video class="about-video" autoplay muted loop playsinline>
+           <source src = "video.MP4" type="video/mp4">
+         </video>video>
+        
         <p class="subtext">Ich bin Leon-Kilian, ein 25 jähriger kreativer, junger Rabauke, aufgewachsen an der Ostsee, der sich zwischen Schulstress, dem Traum vom erfolgreichen Fußballer und dem Erwachsenwerden verlor und dabei das Ideal des kleinen, frechen Fratz mit Sand in den Haaren vergaß, diesen verpeilten burschen, der er mal war zumindest bis jetzt durch die kunst und all dem was dazu gehört, sketches in büchern, phrasen in der notiz app, farben der natur und das rauschen des meeres, verliere ich mich nur noch auf leinwänden verarbeite alte geschichten, male sie neu, wie sie mir gefallen, male mich neu, dich.</p>
       </div>
     </div>
