@@ -136,22 +136,23 @@
 
   /* fenster / lightbox */
   .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,33,255,0.15);
-    backdrop-filter: blur(3px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.22s ease;
-    z-index: 50;
-  }
-  .overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
+  position: fixed;
+  inset: 0;
+  background: rgba(0,33,255,0.15);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  z-index: 50;
+}
+.overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+  
 
   .window {
     width: min(560px, 88vw);
