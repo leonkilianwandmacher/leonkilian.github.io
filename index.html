@@ -10,29 +10,27 @@
     font-family: "handschrift leon-kilian";
     src: url("handschrift leon-kilian.ttf");
   }
-@font-face {
-  font-family: "schrift website";
-  src: url("schrift website.otf");
-}
+
   @font-face {
- font-family: "bold font";
-  src: url("bold font.ttf");
-}
- body {
-  background-image: url("hintergrund.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  color: #0021ff;
-  padding: 40px;
-  font-family: "schrift website";
-}
+    font-family: "schrift website";
+    src: url("schrift website.otf");
+  }
+
+  body {
+    background-image: url("kaffee.jpg");
+    background-size: 400px;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #0021ff;
+    padding: 40px;
+    font-family: "schrift website";
+  }
 
   /* ---- überschrift ---- */
 
   h1 {
     color: #0021ff;
-    margin-bottom: 35px;
+    margin-bottom: 10px;
     font-size: 80px;
   }
 
@@ -52,7 +50,7 @@
     padding-left: 100%;
     margin-bottom: 0;
     animation: marquee 12s linear infinite;
-    font-family: "bold font";
+    font-family: "handschrift leon-kilian";
   }
 
   @keyframes marquee {
@@ -69,22 +67,16 @@
     color: #0021ff;
   }
 
-  img.portrait {
-    max-width: 400px;
-    height: auto;
-    border-radius: 4px;
-  }
-
   /* ---- h2 zwischenüberschriften (klickbar, öffnen popups) ---- */
 
- h2 {
-  font-size: 20px;
-  font-family: "schrift website";
-  color: #0021ff;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-}
+  h2 {
+    font-size: 20px;
+    font-family: "handschrift leon-kilian";
+    color: #0021ff;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+  }
 
   .subtext {
     font-size: 16px;
@@ -156,9 +148,8 @@
     width: 100%;
     min-height: 260px;
     margin-top: 12px;
-    background-image: url("kaffee.jpg");
-    background-size: 400px;
-    background-position: center;
+    background-color: #f4f2ef;
+    border: 1px dashed rgba(0,33,255,0.25);
     border-radius: 8px;
     overflow: hidden;
   }
@@ -205,7 +196,7 @@
 
   .folder-label {
     font-size: 12px;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,33,255,0.85);
     color: #ffffff;
     padding: 2px 8px;
     border-radius: 3px;
@@ -237,11 +228,10 @@
 <body>
 
   <div class="marquee-wrap">
-    <h1>leon kilian wandmacher</h1>
+    <h1>leon-kilian wandmacher</h1>
   </div>
 
- 
-
+  <p class="intro">künstler aus berlin, ursprünglich von der ostseeküste.</p>
 
   <!-- über mich -->
   <h2 onclick="openPopup('about-overlay')">über mich</h2>
