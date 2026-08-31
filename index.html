@@ -15,33 +15,23 @@
     font-family: "schrift website";
     src: url("schrift website.otf");
   }
- @font-face {
-  font-family: "fontbold";
-  src: url("fontbold.ttf");
+
+  @font-face {
+    font-family: "bold font";
+    src: url("bold font.ttf");
   }
-body {
-  background-image: url("kaffee.jpg");
-  background-size: 400px;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #0021ff;
-  padding: 40px;
-  font-family: "schrift website";
-}
 
-  .menu-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-  gap: 10px;
-}
+  body {
+    background-image: url("kaffee.jpg");
+    background-size: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #0021ff;
+    padding: 40px;
+    font-family: "schrift website";
+  }
 
-.menu-center h2 {
-  color: #ffffff;
-}
-  /* ---- überschrift ---- */
+  /* ---- überschrift (laufband) ---- */
 
   h1 {
     color: #0021ff;
@@ -73,11 +63,6 @@ body {
     to   { transform: translateX(-100%); }
   }
 
-  .intro {
-    font-size: 20px;
-    opacity: 0.7;
-  }
-
   a {
     color: #0021ff;
   }
@@ -87,19 +72,34 @@ body {
   h2 {
     font-size: 20px;
     font-family: "handschrift leon-kilian";
-    color: #ffffff;
+    color: #0021ff;
     text-decoration: none;
     text-align: center;
     cursor: pointer;
   }
 
-.subtext {
-  font-size: 16px;
-  color: #0021ff;
-  font-family: "schrift website";
-}
+  /* ---- zentriertes menü, weiße schrift für die kaffeetasse ---- */
 
-  /* ---- popup-fenster (über mich / werke / kontakt / ordner-detail) ---- */
+  .menu-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 10px;
+  }
+
+  .menu-center h2 {
+    color: #ffffff;
+  }
+
+  .subtext {
+    font-size: 16px;
+    color: #f2a0a0;
+    font-family: "schrift website";
+  }
+
+  /* ---- popup-fenster (über mich / werke / kontakt / kaufen / ordner-detail) ---- */
 
   .overlay {
     position: fixed;
@@ -223,19 +223,20 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
     gap: 10px;
   }
-  .image-grid div {
-    aspect-ratio: 4/3;
+  .image-grid img {
+    width: 100%;
+    display: block;
     border-radius: 6px;
-    background: linear-gradient(135deg, #f2a0a0, #f6c9c9);
+    aspect-ratio: 4/3;
+    object-fit: cover;
   }
-  .image-grid div:nth-child(2n) { background: linear-gradient(135deg, #0021ff, #7d8bff); }
-  .image-grid div:nth-child(3n) { background: linear-gradient(135deg, #1c2440, #2e3a63); }
 
   /* ---- responsive ---- */
 
   @media (max-width: 600px) {
     h1 { font-size: 40px; }
     .desktop { min-height: 320px; }
+    .menu-center { min-height: 40vh; }
   }
 
 </style>
@@ -243,30 +244,18 @@ body {
 <body>
 
   <div class="marquee-wrap">
-    <h1>leon kilian wandmacher</h1>
+    <h1>leon-kilian wandmacher</h1>
   </div>
 
- <h2 onclick="openPopup('about-overlay')">über mich</h2>
-  <!-- über mich -->
- 
-
+  <!-- zentriertes menü -->
   <div class="menu-center">
-  <h2 onclick="openPopup('about-overlay')">über mich</h2>
-  <h2 onclick="openPopup('werke-overlay')">werke</h2>
-  <h2 onclick="openPopup('kontakt-overlay')">kontakt</h2>
-  <h2 onclick="openPopup('kaufen-overlay')">wie kaufe ich kunst</h2>
-</div>
+    <h2 onclick="openPopup('about-overlay')">über mich</h2>
+    <h2 onclick="openPopup('werke-overlay')">werke</h2>
+    <h2 onclick="openPopup('kontakt-overlay')">kontakt</h2>
+    <h2 onclick="openPopup('kaufen-overlay')">wie kaufe ich kunst</h2>
+  </div>
 
-<div class="overlay" id="about-overlay">
-  ...
-</div>
-
-<div class="overlay" id="werke-overlay">
-  ...
-</div>
-
-<!-- usw für kontakt und kaufen -->
-
+  <!-- über mich -->
   <div class="overlay" id="about-overlay">
     <div class="window">
       <div class="titlebar">
@@ -282,8 +271,6 @@ body {
   </div>
 
   <!-- werke -->
-  <h2 onclick="openPopup('werke-overlay')">werke</h2>
-
   <div class="overlay" id="werke-overlay">
     <div class="window">
       <div class="titlebar">
@@ -300,7 +287,7 @@ body {
   </div>
 
   <!-- ordner-detail popup (öffnet sich, wenn man auf einen ordner klickt) -->
-  <div class="overlay" id="overlay">
+  <div class="overlay" id="ordner-detail-overlay">
     <div class="window">
       <div class="titlebar">
         <div class="dot red"></div>
@@ -315,8 +302,6 @@ body {
   </div>
 
   <!-- kontakt -->
-  <h2 onclick="openPopup('kontakt-overlay')">kontakt</h2>
-
   <div class="overlay" id="kontakt-overlay">
     <div class="window">
       <div class="titlebar">
@@ -327,39 +312,37 @@ body {
       </div>
       <div class="window-body">
         <p>schreib mir: <a href="mailto:hallo@leonkilian.com">hallo@leonkilian.com</a></p>
-       <p>oder auf <a href="https://www.instagram.com/leeonkilian/">instagram</a></p>
+        <p>oder auf <a href="https://www.instagram.com/leeonkilian/">instagram</a></p>
       </div>
     </div>
   </div>
 
   <!-- wie kaufe ich kunst -->
-<h2 onclick="openPopup('kaufen-overlay')">wie kaufe ich kunst</h2>
-
-<div class="overlay" id="kaufen-overlay">
-  <div class="window">
-    <div class="titlebar">
-      <div class="dot red"></div>
-      <div class="dot yellow"></div>
-      <div class="dot green"></div>
-      <span>wie kaufe ich kunst</span>
-    </div>
-    <div class="window-body">
-      <p class="subtext">[hier kommt dein text rein, sobald du ihn geschrieben hast]</p>
+  <div class="overlay" id="kaufen-overlay">
+    <div class="window">
+      <div class="titlebar">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <span>wie kaufe ich kunst</span>
+      </div>
+      <div class="window-body">
+        <p class="subtext">[hier kommt dein text rein, sobald du ihn geschrieben hast]</p>
+      </div>
     </div>
   </div>
-</div>
 
   <script>
-    // deine drei werke als ordner, count = anzahl platzhalter-kacheln im detail-fenster
-   const folders = [
-  { name: "whydoyouthinkwemet", images: ["whydoyouthinkwemet.jpg", "whydoyouthinkwemet2.jpg", "whydoyouthinkwemet3.jpg"] },
-  { name: "erinnerung an blau", images: ["blau1.jpg", "blau2.jpg", "blau3.jpg", "blau4.jpg"] },
-  { name: "vergiss mich nicht zu schnell", images: ["vergissmichnichtzuschnell.jpg", "vergissmichnichtzuschnell1.jpg", "vergissmichnichtzuschnell2.jpg"] },
-];
+    // deine werke als ordner. "images" = liste der dateinamen für jedes werk.
+    // trag hier die echten dateinamen deiner bilder ein, sobald sie im ordner liegen.
+    const folders = [
+      { name: "feverdream", images: ["feverdream1.jpg", "feverdream2.jpg", "feverdream3.jpg"] },
+      { name: "erinnerung an blau", images: ["blau1.jpg", "blau2.jpg", "blau3.jpg", "blau4.jpg"] },
+      { name: "vergiss mich nicht zu schnell", images: ["vergiss1.jpg", "vergiss2.jpg", "vergiss3.jpg"] },
     ];
 
     const desktop = document.getElementById('desktop');
-    const overlay = document.getElementById('overlay');
+    const ordnerOverlay = document.getElementById('ordner-detail-overlay');
     const windowTitle = document.getElementById('window-title');
     const imageGrid = document.getElementById('image-grid');
 
@@ -400,11 +383,12 @@ body {
     function openFolder(folder) {
       windowTitle.textContent = folder.name;
       imageGrid.innerHTML = '';
-      for (let i = 0; i < folder.count; i++) {
-        const div = document.createElement('div');
-        imageGrid.appendChild(div);
-      }
-      overlay.classList.add('active');
+      folder.images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        imageGrid.appendChild(img);
+      });
+      ordnerOverlay.classList.add('active');
     }
 
     function openPopup(id) {
