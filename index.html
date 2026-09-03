@@ -1147,31 +1147,37 @@ function openFolder(folder) {
 /* ================================================= */
 
 document
-  .querySelectorAll(".overlay")
-  .forEach(overlay => {
+const allTabs = document.querySelectorAll(".menu-center h2");
 
-    overlay.addEventListener(
-      "click",
-      event => {
+function zeigeAlleTabs() {
+  allTabs.forEach(tab => tab.classList.remove("tab-hidden"));
+}
 
-        /*
-          Nur wenn der Benutzer auf
-          den Bereich außerhalb des Fensters
-          klickt, wird geschlossen.
-        */
+document
+  .querySelectorAll("[data-popup]")
+  .forEach(item => {
 
-        if (
-          event.target === overlay
-        ) {
+    item.addEventListener("click", () => {
 
-          overlay.classList.remove(
-            "active"
-          );
+      const popupId = item.getAttribute("data-popup");
+      const popup = document.getElementById(popupId);
 
-        }
-
+      if (!popup) {
+        console.error("Popup nicht gefunden:", popupId);
+        return;
       }
-    );
+
+      popup.classList.add("active");
+
+      if (popupId === "comingsoon-overlay") {
+        allTabs.forEach(tab => {
+          if (tab !== item) {
+            tab.classList.add("tab-hidden");
+          }
+        });
+      }
+
+    });
 
   });
 
