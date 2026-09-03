@@ -389,7 +389,10 @@ h2:hover {
   aspect-ratio: 3/4;
   object-fit: cover;
 }
-
+.tab-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
 /* ---- responsive ---- */
 
 @media (max-width: 600px) {
@@ -454,6 +457,21 @@ h2:hover {
 
   <h2 data-popup="wichtig-overlay">
     wichtig
+    <div class="overlay" id="comingsoon-overlay">
+  <div class="window">
+    <div class="titlebar">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <span>coming soon</span>
+    </div>
+    <div class="window-body">
+      <p class="subtext">
+        hier entsteht bald etwas neues.
+      </p>
+    </div>
+  </div>
+</div>
   </h2>
 
 </div>
@@ -729,6 +747,7 @@ h2:hover {
     mut es ist okay wenn du den noch nicht hast
 
   </p>
+  
 
 </div>
 ```
@@ -736,6 +755,39 @@ h2:hover {
   </div>
 
 </div>
+  const allTabs = document.querySelectorAll(".menu-center h2");
+
+document
+  .querySelectorAll("[data-popup]")
+  .forEach(item => {
+
+    item.addEventListener("click", () => {
+
+      const popupId = item.getAttribute("data-popup");
+      const popup = document.getElementById(popupId);
+
+      if (!popup) {
+        console.error("Popup nicht gefunden:", popupId);
+        return;
+      }
+
+      popup.classList.add("active");
+
+      if (popupId === "comingsoon-overlay") {
+        allTabs.forEach(tab => {
+          if (tab !== item) {
+            tab.classList.add("tab-hidden");
+          }
+        });
+      }
+
+    });
+
+  });
+
+function zeigeAlleTabs() {
+  allTabs.forEach(tab => tab.classList.remove("tab-hidden"));
+}
 
 <script>
 
