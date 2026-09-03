@@ -389,10 +389,7 @@ h2:hover {
   aspect-ratio: 3/4;
   object-fit: cover;
 }
-.tab-hidden {
-  opacity: 0;
-  pointer-events: none;
-}
+
 /* ---- responsive ---- */
 
 @media (max-width: 600px) {
@@ -413,6 +410,72 @@ h2:hover {
     min-height: 40vh;
   }
 
+}
+
+
+/* ---- COMING SOON MODUS ---- */
+
+body.coming-soon-mode .marquee-wrap,
+body.coming-soon-mode .menu-center {
+  display: none;
+}
+
+.coming-soon-screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+body.coming-soon-mode .coming-soon-screen {
+  display: flex;
+}
+
+.coming-soon-content {
+  text-align: center;
+  font-family: "handschrift leon-kilian";
+  color: #0021ff;
+}
+
+.coming-soon-content h2 {
+  margin: 0;
+  font-size: clamp(42px, 9vw, 100px);
+  color: #0021ff;
+  cursor: default;
+}
+
+.coming-soon-content p {
+  margin: 8px 0 0;
+  font-family: "schrift website";
+  font-size: 14px;
+  color: #0021ff;
+}
+
+/* Der Coming-Soon-Reiter bleibt als einziger sichtbarer Menüpunkt. */
+.coming-soon-tab {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 110;
+  display: none;
+  font-family: "handschrift leon-kilian";
+  font-size: 22px;
+  color: #0021ff;
+  cursor: pointer;
+  text-align: center;
+}
+
+body:not(.coming-soon-mode) .coming-soon-tab {
+  display: block;
+}
+
+body.coming-soon-mode .coming-soon-tab {
+  display: none;
 }
 
 </style>
@@ -437,6 +500,10 @@ h2:hover {
 
 <!-- ==================== -->
 
+<div class="coming-soon-tab" id="coming-soon-tab">
+  coming soon
+</div>
+
 <div class="menu-center">
 
   <h2 data-popup="about-overlay">
@@ -457,21 +524,6 @@ h2:hover {
 
   <h2 data-popup="wichtig-overlay">
     wichtig
-    <div class="overlay" id="comingsoon-overlay">
-  <div class="window">
-    <div class="titlebar">
-      <div class="dot red"></div>
-      <div class="dot yellow"></div>
-      <div class="dot green"></div>
-      <span>coming soon</span>
-    </div>
-    <div class="window-body">
-      <p class="subtext">
-        hier entsteht bald etwas neues.
-      </p>
-    </div>
-  </div>
-</div>
   </h2>
 
 </div>
@@ -747,7 +799,6 @@ h2:hover {
     mut es ist okay wenn du den noch nicht hast
 
   </p>
-  
 
 </div>
 ```
@@ -755,39 +806,18 @@ h2:hover {
   </div>
 
 </div>
-  const allTabs = document.querySelectorAll(".menu-center h2");
 
-document
-  .querySelectorAll("[data-popup]")
-  .forEach(item => {
 
-    item.addEventListener("click", () => {
+<!-- ==================== -->
+<!-- COMING SOON -->
+<!-- ==================== -->
 
-      const popupId = item.getAttribute("data-popup");
-      const popup = document.getElementById(popupId);
-
-      if (!popup) {
-        console.error("Popup nicht gefunden:", popupId);
-        return;
-      }
-
-      popup.classList.add("active");
-
-      if (popupId === "comingsoon-overlay") {
-        allTabs.forEach(tab => {
-          if (tab !== item) {
-            tab.classList.add("tab-hidden");
-          }
-        });
-      }
-
-    });
-
-  });
-
-function zeigeAlleTabs() {
-  allTabs.forEach(tab => tab.classList.remove("tab-hidden"));
-}
+<div class="coming-soon-screen" id="coming-soon-screen">
+  <div class="coming-soon-content">
+    <h2>coming soon</h2>
+    <p>stay tuned &lt;3</p>
+  </div>
+</div>
 
 <script>
 
@@ -1147,37 +1177,31 @@ function openFolder(folder) {
 /* ================================================= */
 
 document
-const allTabs = document.querySelectorAll(".menu-center h2");
+  .querySelectorAll(".overlay")
+  .forEach(overlay => {
 
-function zeigeAlleTabs() {
-  allTabs.forEach(tab => tab.classList.remove("tab-hidden"));
-}
+    overlay.addEventListener(
+      "click",
+      event => {
 
-document
-  .querySelectorAll("[data-popup]")
-  .forEach(item => {
+        /*
+          Nur wenn der Benutzer auf
+          den Bereich außerhalb des Fensters
+          klickt, wird geschlossen.
+        */
 
-    item.addEventListener("click", () => {
+        if (
+          event.target === overlay
+        ) {
 
-      const popupId = item.getAttribute("data-popup");
-      const popup = document.getElementById(popupId);
+          overlay.classList.remove(
+            "active"
+          );
 
-      if (!popup) {
-        console.error("Popup nicht gefunden:", popupId);
-        return;
+        }
+
       }
-
-      popup.classList.add("active");
-
-      if (popupId === "comingsoon-overlay") {
-        allTabs.forEach(tab => {
-          if (tab !== item) {
-            tab.classList.add("tab-hidden");
-          }
-        });
-      }
-
-    });
+    );
 
   });
 
@@ -1206,6 +1230,29 @@ document.addEventListener(
 
   }
 );
+
+
+/* ================================================= */
+/* COMING SOON */
+/* ================================================= */
+
+const comingSoonTab =
+  document.getElementById("coming-soon-tab");
+
+const comingSoonScreen =
+  document.getElementById("coming-soon-screen");
+
+comingSoonTab.addEventListener("click", () => {
+  document.body.classList.add("coming-soon-mode");
+});
+
+/*
+  Klick auf die Coming-Soon-Seite bringt die normale
+  Navigation zurück.
+*/
+comingSoonScreen.addEventListener("click", () => {
+  document.body.classList.remove("coming-soon-mode");
+});
 
 </script>
 
